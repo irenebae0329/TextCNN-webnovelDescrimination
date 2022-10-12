@@ -1,4 +1,3 @@
-
 import requests
 import pymongo
 from pyquery import PyQuery as pq
