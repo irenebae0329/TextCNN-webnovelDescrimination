@@ -26,16 +26,15 @@ def preprocess(sentences,stop_words_path):
         return outstr.strip()
     def save_words_as_txt(processed_words_list):
         with open('words_sentence.txt','w') as f:
-            for word in processed_words_list:
-                f.write(word+"\n")
+            for sentence in processed_words_list:
+                f.write(sentence+"\n")
             f.close()
     stop_words=load_stop_words(stop_words_path)
     filtered_words_list=[]
     for sentence in sentences:
-        for word in seg_sentence(sentence).split(" "):
-            filtered_words_list.append(word)
+        filtered_words_list.append(seg_sentence(sentence))
     save_words_as_txt(filtered_words_list)
-stop_words_path="/Users/lwd011204/书籍爬虫/book_spyder/module/stop_words.txt"
+stop_words_path="/Users/lwd011204/书籍爬虫/book_spyder/model/stop_words.txt"
 processed_words_list=preprocess(read_from_dataBase(),stop_words_path=stop_words_path)
 
     
