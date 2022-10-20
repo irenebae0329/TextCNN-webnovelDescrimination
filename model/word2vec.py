@@ -10,3 +10,4 @@ train_data=word2vec.LineSentence('/Users/lwd011204/书籍爬虫/book_spyder/word
 model=word2vec.Word2Vec(train_data,epochs=2,min_count=1)
 
 model.save('word2vec.model')
+print(3)
