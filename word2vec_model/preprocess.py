@@ -1,11 +1,12 @@
+from enum import unique
 import pymongo
 import re
 import jieba
 stop_words_path="/Users/lwd011204/书籍爬虫/book_spyder/word2vec_model/stop_words.txt"
+client=pymongo.MongoClient(host='localhost',port=27017)
+db=client['nlp_database']
+collections_cate_urls=db['book']
 def read_from_dataBase():
-    client=pymongo.MongoClient(host='localhost',port=27017)
-    db=client['nlp_database']
-    collections_cate_urls=db['book']
     scratches=[]
     datas=collections_cate_urls.find()
     for data in datas:
@@ -39,5 +40,14 @@ def main():
         filtered_words_list.append(preprocess(sentence,stop_words_path))
     processed_words_list=preprocess(sentences,stop_words_path=stop_words_path)
     save_words_as_txt(processed_words_list=processed_words_list)
+def get_categories():
+    categories=[]
+    datas=collections_cate_urls.find()
+    for data in datas:
+        if data not in categories:
+            categories.append(list(data.keys())[1])
+    with open('resources/categories.txt',mode='w') as fp:
+        for c in categories:
+            fp.write(c+'\n')
 if __name__=='__main__':
-    main()
+    get_categories()

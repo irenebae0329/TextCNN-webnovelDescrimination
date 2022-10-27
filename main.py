@@ -1,7 +1,9 @@
 from gensim.models import word2vec
 import io_utils
-model=word2vec.Word2Vec.load('word2vec.model') 
 import argparse
+vocab=word2vec.Word2Vec.load('word2vec.model') 
+def predict_category(words_list):
+    
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description="text classfication of novels")
     parser.add_argument('--dir')

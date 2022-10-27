@@ -25,6 +25,3 @@ def read_from_txt(path,stop_words_path):
         flag=False
     assert flag,"该文件不存在"
     return [res]
-#read_from_dir("texts",stop_words_path)
-
-#print(preprocess("薄纱布保暖",stop_words_path))
