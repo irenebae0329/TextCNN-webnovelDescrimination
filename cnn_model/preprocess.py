@@ -1,6 +1,3 @@
-from cgi import test
-from unicodedata import category
-import torchtext
 from torchtext import vocab
 import torch
 import torch.nn as nn
@@ -24,7 +21,7 @@ class Scratch_DataSet:
         self.device=device
         self.label_nums=label_nums
         train,test=self.split_train_test(batches)
-        self.train_set=self.get_DataLoader(train)
+        self.train_iter=self.get_DataLoader(train)
         self.test_iter=self.get_DataLoader(test)
         #print(len(train),len(test))
     def get_scratchData(self,cate_num,words_num):
@@ -70,6 +67,8 @@ class Scratch_DataSet:
     def get_DataLoader(self,data_iter):
         DataLoader=torch.utils.data.DataLoader(data_iter,batch_size=64,shuffle=True,collate_fn=self.collate_batch)
         return DataLoader
+    def get_data_iter(self):
+        return self.train_iter,self.test_iter
 def test():
     dataset=Scratch_DataSet(cate_nam="categories.txt",words_nam="words_sentence.txt",vocab=vocab,text_pipeline=text_pipeline,label_pipeline=label_pipeline,device=device,label_nums=len(label2idx))
     label,text=next(iter(dataset.test_iter))
