@@ -38,12 +38,3 @@ class TextCNN(nn.Module):
         out=F.dropout(out,p=self.dropout_rate)
         out=self.fc(out)
         return out
-#单词迭代过程
-loss = nn.CrossEntropyLoss(reduction='none')
-net=TextCNN(config)
-trainer = torch.optim.Adam(net.parameters(), lr=0.001)
-trainer.zero_grad()
-y,x=preprocess.test()
-l=loss(net(x),y)
-l.sum().backward()
-trainer.step()
