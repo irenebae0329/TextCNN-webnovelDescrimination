@@ -24,6 +24,7 @@ class Scratch_DataSet:
         self.device=device
         self.label_nums=label_nums
         train,test=self.split_train_test(batches)
+        self.train_set=self.get_DataLoader(train)
         self.test_iter=self.get_DataLoader(test)
         #print(len(train),len(test))
     def get_scratchData(self,cate_num,words_num):
@@ -69,18 +70,6 @@ class Scratch_DataSet:
     def get_DataLoader(self,data_iter):
         DataLoader=torch.utils.data.DataLoader(data_iter,batch_size=64,shuffle=True,collate_fn=self.collate_batch)
         return DataLoader
-class TextClassificationModel(nn.Module):
-    def __init__(self,wv):
-        super(TextClassificationModel, self).__init__()
-        self.wv=wv
-        self.embedding = nn.EmbeddingBag(len(self.wv), self.wv.vector_size,sparse=True)
-        self.init_weights()
-
-    def init_weights(self):
-        self.embedding.weight.data=torch.tensor(self.wv.vectors)
-    def forward(self,text,offset):
-        embedded=self.embedding(text,offset)
-        return embedded
 def test():
     dataset=Scratch_DataSet(cate_nam="categories.txt",words_nam="words_sentence.txt",vocab=vocab,text_pipeline=text_pipeline,label_pipeline=label_pipeline,device=device,label_nums=len(label2idx))
     label,text=next(iter(dataset.test_iter))
