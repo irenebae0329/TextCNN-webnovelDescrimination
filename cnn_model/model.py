@@ -6,14 +6,14 @@ import preprocess
 model=preprocess.model
 model.vector_size,len(model.wv)
 class config:
-    num_class=15
-    dropout_rate=0.1
-    max_text_length=46
-    vocab_size=17146
-    vec_dim=100
-    kernel_sizes=[2,3,4]
+    num_class=15#分类个数，可由ScratchDataset中的成员变量得到
+    dropout_rate=0.1#人为设定
+    max_text_length=46#句子最长长度，ScratchDataset成员变量
+    vocab_size=17146#len(model.wv)
+    vec_dim=100#词向量维度，model.vector
+    kernel_sizes=[2,3,4]#人为设定
     feature_size=100#一维卷积卷积核个数
-    weight=torch.tensor(model.wv.vectors)
+    weight=torch.tensor(model.wv.vectors)#由预训练模型得到,word2vec.wv.vectors
     vocab_size=len(model.wv)
 class TextCNN(nn.Module):
     def __init__(self,config) -> None:
@@ -38,6 +38,7 @@ class TextCNN(nn.Module):
         out=F.dropout(out,p=self.dropout_rate)
         out=self.fc(out)
         return out
+#单词迭代过程
 loss = nn.CrossEntropyLoss(reduction='none')
 net=TextCNN(config)
 trainer = torch.optim.Adam(net.parameters(), lr=0.001)
