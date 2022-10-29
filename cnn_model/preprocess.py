@@ -7,7 +7,7 @@ import json
 from torch.utils.data import DataLoader
 resources_path='resources'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model=word2vec.Word2Vec.load("/Users/lwd011204/书籍爬虫/book_spyder/resources/word2vec.model")
+model=word2vec.Word2Vec.load(os.path.abspath('.')+"/resources/word2vec.model")
 vocab=model.wv.key_to_index
 label2idx=json.load(open(os.path.join(resources_path,'categories.json')))
 text_pipeline=lambda x:[vocab[word] for word in x]
