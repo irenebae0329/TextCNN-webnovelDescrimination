@@ -6,6 +6,7 @@ import os
 from gensim.models import word2vec
 import json
 from torch.utils.data import DataLoader
+import TCNN
 resources_path='resources'
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model=word2vec.Word2Vec.load("/Users/lwd011204/书籍爬虫/book_spyder/resources/word2vec.model")
@@ -26,3 +27,4 @@ l=loss(net(x),y)
 l.sum().backward()
 trainer.step()
 '''
+net=TCNN.TextCNN(TCNN.config)
