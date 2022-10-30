@@ -1,5 +1,5 @@
 from calendar import EPOCH
-import time
+from time import time
 import preprocess
 from torchtext import vocab
 import torch
@@ -33,7 +33,7 @@ trainer.step()
 loss = nn.CrossEntropyLoss(reduction='none')    #criterion
 net=TCNN.TextCNN(TCNN.config)   #model
 trainer = torch.optim.Adam(net.parameters(), lr=0.001)  #optimizer
-Epochs=3    #epoch
+Epochs=6    #epoch
 
 # train_dataloader=mydataset.get_DataLoader(train_iter)
 # test_dataloader=mydataset.get_DataLoader(test_iter)
@@ -42,27 +42,28 @@ Epochs=3    #epoch
 # print(len(train_dataloader))
 # print(len(train_iter))
 
-"""
+
 def train(dataloader,epoch):
     net.train()
-    log_interval=300
+    log_interval=5
     start_time=time()
     for idx,(label, text) in enumerate(dataloader):
-        trainer.zerograd()
+        trainer.zero_grad()
         y,x=preprocess.test()
         l=loss(net(x),y)
         l.sum().backward()
+        L=l.sum()
         trainer.step()
         if idx%log_interval==0 and idx>0:
             time_interval=time()-start_time
-            print('| epoch {:3d} | {:5d}/{:5d} batches | {:5.f}s |').format(epoch,idx,len(dataloader,time_interval))
-            start_time = time.time()
+            print(f'| epoch {epoch:3d} | {idx:5d}/{len(dataloader):5d} batches | {time_interval:5.2f}s | loss {L:6.2f} |')
+            start_time = time()
 
 for epoch in range(1, Epochs + 1):
     epoch_start_time = time()
-    train(train_dataloader,epoch)
+    train(train_iter,epoch)
     print('-' * 59)
-    print('| end of epoch {:3d} | time: {:5.2f}s | '.format(epoch,time() - epoch_start_time))
+    print(f'| end of epoch {epoch:3d} | time: {time() - epoch_start_time:5.2f}s | ')
     print('-' * 59)
-"""
+
 
