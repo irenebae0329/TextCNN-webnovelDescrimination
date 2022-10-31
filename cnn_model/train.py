@@ -35,14 +35,6 @@ net=TCNN.TextCNN(TCNN.config)   #model
 trainer = torch.optim.Adam(net.parameters(), lr=0.001)  #optimizer
 Epochs=6    #epoch
 
-# train_dataloader=mydataset.get_DataLoader(train_iter)
-# test_dataloader=mydataset.get_DataLoader(test_iter)
-# print(type(train_dataloader))
-# print(type(train_iter))
-# print(len(train_dataloader))
-# print(len(train_iter))
-
-
 def train(dataloader,epoch):
     net.train()
     log_interval=5
