@@ -21,11 +21,8 @@ train_iter,test_iter=mydataset.get_data_iter()
 loss = nn.CrossEntropyLoss(reduction='none')    #criterion
 net=TCNN.TextCNN(TCNN.config)   #model
 trainer = torch.optim.Adam(net.parameters(), lr=0.001)  #optimizer
-<<<<<<< HEAD
-Epochs=6    #epoch
-=======
-Epochs=11    #epoch
->>>>>>> ceec9a8d98947a9ab5788fcfa496ad8c43594b85
+Epochs=8    #epoch
+
 
 def train(dataloader,epoch):
     net.train()
