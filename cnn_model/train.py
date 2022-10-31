@@ -38,7 +38,7 @@ def train(dataloader,epoch):
         trainer.step()
         if idx%log_interval==0 and idx>0:
             time_interval=time()-start_time
-            print(f'| epoch {epoch:3d} | {idx:5d}/{len(dataloader):5d} batches | {time_interval:5.2f}s | loss {L:6.2f}')
+            print(f'| epoch {epoch:3d} | {idx:5d}/{len(dataloader):5d} batches | {time_interval:5.2f}s | loss {L:6.2f} |')
             start_time = time()
 def evaluate(dataloader):
     total_acc,total_count=0,0
@@ -54,8 +54,8 @@ def main():
         epoch_start_time = time()
         train(train_iter,epoch)
         accuracy=evaluate(test_iter)
-        print('-' * 59)
+        print('-' * 57)
         print(f'| end of epoch {epoch:3d} | time: {time() - epoch_start_time:5.2f}s | accuracy {accuracy:2f}')
-        print('-' * 59)
+        print('-' * 57)
 if __name__=='__main__':
     main()
