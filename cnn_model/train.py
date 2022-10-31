@@ -54,8 +54,8 @@ def main():
         epoch_start_time = time()
         train(train_iter,epoch)
         accuracy=evaluate(test_iter)
-        print('-' * 57)
+        print('-' * 58)
         print(f'| end of epoch {epoch:3d} | time: {time() - epoch_start_time:5.2f}s | accuracy {accuracy:2f}')
-        print('-' * 57)
+        print('-' * 58)
 if __name__=='__main__':
     main()
