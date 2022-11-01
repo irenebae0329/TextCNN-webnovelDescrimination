@@ -42,7 +42,7 @@ def train(dataloader,epoch):
 def evaluate(dataloader):
     total_acc,total_count=0,0
     with torch.no_grad():
-        for idx,(label,text) in enumerate(dataloader):
+        for label,text in dataloader:
             predicted_label=net(text)
             lo=loss(predicted_label,label)
             total_acc+=(predicted_label.argmax(1)==label).sum().item()
@@ -56,5 +56,7 @@ def main():
         print('-' * 59)
         print(f'| end of epoch {epoch:3d} | time: {time() - epoch_start_time:5.2f}s | accuracy {accuracy:2f}')
         print('-' * 59)
+    torch.save(net.state_dict(),'cnn')
 if __name__=='__main__':
     main()
+    torch.load("/Users/lwd011204/书籍爬虫/book_spyder/cnn.pt")

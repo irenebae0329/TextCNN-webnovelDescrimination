@@ -20,8 +20,8 @@ def read_from_txt(path,stop_words_path):
         with open(path,'r') as fp:
             flag=True
             for sentence in fp.readlines():
-                res.append(preprocess(sentence,stop_words_path))
+                res.append((sentence,preprocess(sentence,stop_words_path).split(" ")))                
     except:
         flag=False
     assert flag,"该文件不存在"
-    return [res]
+    return res

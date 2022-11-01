@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from gensim.models import word2vec
-import preprocess
-model=preprocess.model
-model.vector_size,len(model.wv)
+#mport cnn_model.preprocess as preprocess
+model=word2vec.Word2Vec.load("/Users/lwd011204/书籍爬虫/book_spyder/resources/word2vec.model")
+print(model.vector_size,len(model.wv))
 class config:
     num_class=15#分类个数，可由ScratchDataset中的成员变量得到
     dropout_rate=0.1#人为设定
