@@ -21,7 +21,8 @@ train_iter,test_iter=mydataset.get_data_iter()
 loss = nn.CrossEntropyLoss(reduction='none')    #criterion
 net=TCNN.TextCNN(TCNN.config)   #model
 trainer = torch.optim.Adam(net.parameters(), lr=0.001)  #optimizer
-Epochs=11    #epoch
+Epochs=8    #epoch
+
 
 def train(dataloader,epoch):
     net.train()
@@ -37,7 +38,7 @@ def train(dataloader,epoch):
         trainer.step()
         if idx%log_interval==0 and idx>0:
             time_interval=time()-start_time
-            print(f'| epoch {epoch:3d} | {idx:5d}/{len(dataloader):5d} batches | {time_interval:5.2f}s | loss {L:6.2f}')
+            print(f'| epoch {epoch:3d} | {idx:5d}/{len(dataloader):5d} batches | {time_interval:5.2f}s | loss {L:6.2f} |')
             start_time = time()
 def evaluate(dataloader):
     total_acc,total_count=0,0
@@ -53,10 +54,14 @@ def main():
         epoch_start_time = time()
         train(train_iter,epoch)
         accuracy=evaluate(test_iter)
-        print('-' * 59)
+        print('-' * 58)
         print(f'| end of epoch {epoch:3d} | time: {time() - epoch_start_time:5.2f}s | accuracy {accuracy:2f}')
+<<<<<<< HEAD
         print('-' * 59)
     torch.save(net.state_dict(),'cnn')
+=======
+        print('-' * 58)
+>>>>>>> 0206f9399289bfc83fffd09b38fa99f04df731e9
 if __name__=='__main__':
     main()
     torch.load("/Users/lwd011204/书籍爬虫/book_spyder/cnn.pt")
