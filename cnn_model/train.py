@@ -56,12 +56,8 @@ def main():
         accuracy=evaluate(test_iter)
         print('-' * 58)
         print(f'| end of epoch {epoch:3d} | time: {time() - epoch_start_time:5.2f}s | accuracy {accuracy:2f}')
-<<<<<<< HEAD
         print('-' * 59)
     torch.save(net.state_dict(),'cnn')
-=======
-        print('-' * 58)
->>>>>>> 0206f9399289bfc83fffd09b38fa99f04df731e9
 if __name__=='__main__':
     main()
     torch.load("/Users/lwd011204/书籍爬虫/book_spyder/cnn.pt")
